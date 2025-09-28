@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Meta
   - Enemigo
+  - PlayerHead
   layers:
   - Default
   - TransparentFX

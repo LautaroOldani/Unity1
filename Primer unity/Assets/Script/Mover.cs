@@ -1,6 +1,4 @@
 
-  using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Mover : MonoBehaviour
@@ -11,7 +9,6 @@ public class Mover : MonoBehaviour
 
     // Variables de uso interno en el script
     private float moverHorizontal;
-    private Vector2 direccion;
 
     // Variable para referenciar otro componente del objeto
     private Rigidbody2D miRigidbody2D;
@@ -26,10 +23,11 @@ public class Mover : MonoBehaviour
     private void Update()
     {
         moverHorizontal = Input.GetAxis("Horizontal");
-        direccion = new Vector2(moverHorizontal, 0f);
     }
+
     private void FixedUpdate()
     {
-        miRigidbody2D.AddForce(direccion * velocidad);
+        // Esta línea es la que corregimos: usa 'linearVelocity'
+        miRigidbody2D.linearVelocity = new Vector2(moverHorizontal * velocidad, miRigidbody2D.linearVelocity.y);
     }
-}  
+}

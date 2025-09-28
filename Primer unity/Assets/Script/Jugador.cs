@@ -3,55 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class Jugador : MonoBehaviour
 {
     [Header("Configuracion")]
     [SerializeField] private float vida = 100f;
-
-    [Header("HUD")]
-    public TextMeshProUGUI vidaText;
-    public GameObject textoDerrota;
+    [SerializeField] public float danioAlEnemigo = 10f;
+    public UnityEvent<float> OnVidaCambiada;
+    public UnityEvent OnDerrota; 
 
     void Start()
     {
-        if (textoDerrota != null)
-        {
-            textoDerrota.SetActive(false);
-        }
-        ActualizarHUD();
+        
+        OnVidaCambiada.Invoke(vida);
     }
 
     public void ModificarVida(float puntos)
     {
         vida += puntos;
-
         vida = Mathf.Clamp(vida, 0, 100);
 
-        ActualizarHUD();
-
+        
         if (vida <= 0)
         {
             Perdiste();
         }
-    }
 
-    private void ActualizarHUD()
-    {
-        if (vidaText != null)
-        {
-            vidaText.text = "Vida: " + vida.ToString();
-        }
+        
+        OnVidaCambiada.Invoke(vida);
     }
 
     private void Perdiste()
     {
         Debug.Log("PERDISTE");
 
-        if (textoDerrota != null)
-        {
-            textoDerrota.SetActive(true);
-        }
+      
+        OnDerrota.Invoke();
 
         StartCoroutine(ReiniciarNivel());
     }

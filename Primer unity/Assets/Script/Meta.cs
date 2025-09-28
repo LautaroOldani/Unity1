@@ -1,37 +1,30 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events; 
 
-public class GoalScript : MonoBehaviour
+public class meta : MonoBehaviour 
 {
-   
-    public GameObject textoVictoria;
+    
+
+    public UnityEvent OnVictoria; 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
         if (other.CompareTag("Player"))
         {
             Debug.Log("¡Meta alcanzada! ¡Ganaste!");
 
             
-            if (textoVictoria != null)
-            {
-                textoVictoria.SetActive(true);
-            }
+            OnVictoria.Invoke();
 
-            
             StartCoroutine(ReiniciarNivel());
         }
     }
 
-    
     private IEnumerator ReiniciarNivel()
     {
-       
         yield return new WaitForSeconds(2);
-
-        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
