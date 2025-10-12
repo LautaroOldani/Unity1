@@ -31,7 +31,7 @@ public class ProgressionManager : MonoBehaviour
 
         OnExpGanada.Invoke(playerData.currentExperience, playerData.expToNextLevel);
 
-        // La revisión ahora es un bucle
+        
         if (playerData.currentExperience >= playerData.expToNextLevel)
         {
             LevelUp();
@@ -40,8 +40,7 @@ public class ProgressionManager : MonoBehaviour
 
     private void LevelUp()
     {
-        // Usa un bucle para asegurar que se suba de nivel por cada 
-        // cantidad de experiencia requerida.
+        
         while (playerData.currentExperience >= playerData.expToNextLevel)
         {
             playerData.currentExperience -= playerData.expToNextLevel;
@@ -51,7 +50,7 @@ public class ProgressionManager : MonoBehaviour
             OnSubirNivel.Invoke(playerData.currentLevel);
         }
 
-        // Esta línea asegura que la barra de experiencia se actualice después de subir de nivel.
+        
         OnExpGanada.Invoke(playerData.currentExperience, playerData.expToNextLevel);
     }
 }

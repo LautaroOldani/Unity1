@@ -4,24 +4,24 @@ using TMPro;
 
 public class HUDController : MonoBehaviour
 {
-    // Variables para la vida del jugador
+    
     [Header("UI Vida")]
     public TextMeshProUGUI textoVida;
 
-    // Variables para el sistema de progresión
+    
     [Header("UI Progresión")]
     public Slider barraExp;
     public TextMeshProUGUI textoNivel;
 
-    // Variables para los mensajes de victoria/derrota
+    
     [Header("Mensajes de Juego")]
     public TextMeshProUGUI textoDerrota;
     public TextMeshProUGUI textoVictoria;
 
-    // Este método se llama cuando el juego empieza.
+   
     void Start()
     {
-        // Esto inicializa el texto del nivel con el valor actual del jugador.
+        
         if (ProgressionManager.Instance != null && ProgressionManager.Instance.playerData != null)
         {
             ActualizarNivel(ProgressionManager.Instance.playerData.currentLevel);
