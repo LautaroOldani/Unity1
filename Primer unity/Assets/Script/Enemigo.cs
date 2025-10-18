@@ -3,22 +3,40 @@
 public class Enemigo : MonoBehaviour
 {
     [Header("Configuracion")]
-   
+
     public float vidaMaxima = 30f;
     public float vida = 30f;
     public float experienciaADar = 10f;
 
-   
+    
+    private Animator anim;
+
+
     public void ResetearEnemigo()
     {
-        vida = vidaMaxima; 
+        vida = vidaMaxima;
         
+        if (anim == null)
+        {
+            anim = GetComponent<Animator>();
+        }
     }
 
     public void TomarDaño(float cantidad)
     {
         vida -= cantidad;
         Debug.Log("El enemigo tiene " + vida + " de vida restante.");
+
+        
+        if (anim != null)
+        {
+            anim.SetTrigger("Hit");
+        }
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound(AudioManager.Instance.golpeEnemigo);
+        }
 
         if (vida <= 0)
         {
@@ -33,7 +51,8 @@ public class Enemigo : MonoBehaviour
             ProgressionManager.Instance.AddExperience(experienciaADar);
         }
 
-        
+       
+
         ObjectPooler.Instance.ReturnToPool("Enemigo", this.gameObject);
     }
 

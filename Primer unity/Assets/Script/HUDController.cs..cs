@@ -4,30 +4,46 @@ using TMPro;
 
 public class HUDController : MonoBehaviour
 {
-    
+
     [Header("UI Vida")]
     public TextMeshProUGUI textoVida;
 
-    
+
     [Header("UI Progresión")]
     public Slider barraExp;
     public TextMeshProUGUI textoNivel;
 
-    
+
     [Header("Mensajes de Juego")]
     public TextMeshProUGUI textoDerrota;
     public TextMeshProUGUI textoVictoria;
 
    
+    [Header("UI Puntuación")]
+    public TextMeshProUGUI textoPuntuacion;
+    
+
+
     void Start()
     {
-        
+
         if (ProgressionManager.Instance != null && ProgressionManager.Instance.playerData != null)
         {
             ActualizarNivel(ProgressionManager.Instance.playerData.currentLevel);
             ActualizarExp(ProgressionManager.Instance.playerData.currentExperience, ProgressionManager.Instance.playerData.expToNextLevel);
         }
     }
+
+   
+    public void ActualizarTextoPuntuacion(int nuevaPuntuacion)
+    {
+        if (textoPuntuacion != null)
+        {
+            textoPuntuacion.text = "Monedas: " + nuevaPuntuacion.ToString();
+        }
+    }
+    
+
 
     public void ActualizarVida(float vida)
     {

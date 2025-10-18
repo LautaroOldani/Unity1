@@ -1,4 +1,4 @@
-﻿using System.Collections; 
+﻿using System.Collections;
 using UnityEngine;
 
 public class SpawnerManager : MonoBehaviour
@@ -15,7 +15,8 @@ public class SpawnerManager : MonoBehaviour
     
     IEnumerator IniciarGeneracionConRetraso()
     {
-        yield return null;
+        
+        yield return new WaitForSeconds(1f);
 
         
         GenerarObjetosInstantaneos();
